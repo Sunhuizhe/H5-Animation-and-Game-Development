@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Canvas 执行上下文（context） </title>
+        <link rel="stylesheet" href="css/LS02.css"/>
+    </head>
+    <body>
+        <canvas id="canvas" width="500" height="500" style="border:5px solid #ccc">
+        </canvas>
+    </body>
+    <script>
+        // canvas案例
+        window.onload=function(){
+            canvasApp();
+        }
+        function canvasApp(){
+            var theCanvas = document.getElementById('canvas');
+            var context = theCanvas.getContext('2d');
+
+            console.log(context instanceof CanvasRenderingContext2D);               //true 
+            console.log(CanvasRenderingContext2D.prototype == context.__proto__);   //true
+
+            // for (const key in context) {
+            //     const element = context[key];
+            //     if (context.hasOwnProperty(key)) {
+            //         console.log("自身属性:", element);
+            //     } else {
+            //         console.log("非自身属性:", element);
+            //     }
+            // }
+
+            context.lineWidth = 10;
+            context.strokeStyle = "blue";
+            context.moveTo(50, 50);
+            context.lineTo(100, 100);
+            context.stroke();
+
+            context.lineWidth = 2;
+            context.strokeStyle = "#ff0000";
+            //context.beginPath();      //思考：若没有这句话会怎样？ 用现在的样式，将上面的路径再画一遍
+            context.moveTo(50, 100);
+            context.lineTo(100, 150);
+            context.stroke();
+        }
+
+    </script>
+</html>
